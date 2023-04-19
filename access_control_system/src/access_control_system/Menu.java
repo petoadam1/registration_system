@@ -46,6 +46,28 @@ public class Menu extends JFrame {
 	private JTextField textYear;
 	private JTextField textMonth;
 	private JTextField textDay;
+	private JToggleButton queryToggleButton;
+	private JToggleButton addToggleButton;
+	private JToggleButton updateToggleButton;
+	private JToggleButton deleteToggleButton;
+	private JScrollPane scrollPane;
+	private JComboBox<String> comboRoles;
+	private JButton btnMain;
+	private JButton btnPasses;
+	private JButton btnOpeningHours;
+	private JButton btnRoles;
+	private JLabel lblRole;
+	private JLabel lblName;
+	private JLabel lblRfid;
+	private JLabel lblPhone;
+	private JLabel lblValidity;
+	private JLabel lblYear;
+	private JLabel lblMonth;
+	private JLabel lblDay;
+	JLabel lblResultCount;
+	private OpeningHours openinghours;
+	private Passes passes;
+	private Roles roles;
 
 	/**
 	 * Launch the application.
@@ -56,6 +78,7 @@ public class Menu extends JFrame {
 			public void run() {
 				try {
 					Menu menu = new Menu();
+					menu.setLocationRelativeTo(null);
 					menu.setVisible(true);
 
 				} catch (Exception e) {
@@ -69,10 +92,9 @@ public class Menu extends JFrame {
 	 * Create the frame.
 	 */
 	public Menu() {
-
-		OpeningHours openinghours = new OpeningHours();
-		Passes passes = new Passes();
-		Roles roles = new Roles();
+		openinghours = new OpeningHours();
+		passes = new Passes();
+		roles = new Roles();
 
 		/* set window */
 		openinghours.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -85,50 +107,50 @@ public class Menu extends JFrame {
 		contentPane.setLayout(null);
 
 		/* create the menu bars */
-		JToggleButton queryToggleButton = new JToggleButton("Query");
+		queryToggleButton = new JToggleButton("Query");
 		queryToggleButton.setSelected(true);
-		JToggleButton addToggleButton = new JToggleButton("Add");
-		JToggleButton updateToggleButton = new JToggleButton("Update");
-		JToggleButton deleteToggleButton = new JToggleButton("Delete");
+		addToggleButton = new JToggleButton("Add");
+		updateToggleButton = new JToggleButton("Update");
+		deleteToggleButton = new JToggleButton("Delete");
 
 		/* create and set GUI elements */
-		JLabel lblRole = new JLabel("Role:");
+		lblRole = new JLabel("Role:");
 		lblRole.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblRole.setBounds(10, 40, 69, 17);
 		contentPane.add(lblRole);
 
-		JLabel lblName = new JLabel("Name:");
+		lblName = new JLabel("Name:");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblName.setBounds(10, 80, 69, 17);
 
-		JLabel lblRfid = new JLabel("Rfid:");
+		lblRfid = new JLabel("Rfid:");
 		lblRfid.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblRfid.setBounds(10, 120, 69, 17);
 
-		JLabel lblPhone = new JLabel("Phone:");
+		lblPhone = new JLabel("Phone:");
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblPhone.setBounds(10, 160, 69, 17);
 
-		JLabel lblValidity = new JLabel("Validity:");
+		lblValidity = new JLabel("Validity:");
 		lblValidity.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblValidity.setBounds(10, 200, 69, 17);
 
-		JLabel lblYear = new JLabel("Year");
+		lblYear = new JLabel("Year");
 		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblYear.setBounds(120, 200, 41, 17);
 		contentPane.add(lblYear);
 
-		JLabel lblMonth = new JLabel("Month");
+		lblMonth = new JLabel("Month");
 		lblMonth.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMonth.setBounds(192, 200, 41, 17);
 		contentPane.add(lblMonth);
 
-		JLabel lblDay = new JLabel("Day");
+		lblDay = new JLabel("Day");
 		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblDay.setBounds(264, 200, 41, 17);
 		contentPane.add(lblDay);
 
-		JLabel lblResultCount = new JLabel("");
+		lblResultCount = new JLabel("");
 		lblResultCount.setBounds(308, 50, 466, 14);
 		contentPane.add(lblResultCount);
 
@@ -167,28 +189,29 @@ public class Menu extends JFrame {
 		textDay.setBounds(232, 197, 31, 24);
 		contentPane.add(textDay);
 
-		
-		/*TextField textField = new TextField(textName.getText(), textRfid.getText(), textPhone.getText(), textYear.getText(), textMonth.getText(), textDay.getText());*/
-		/*textFields[0] = textName;
-		textFields[1] = textRfid;
-		textFields[2] = textPhone;
-		textFields[3] = textYear;
-		textFields[4] = textMonth;
-		textFields[5] = textDay;*/
-		
+		/*
+		 * TextField textField = new TextField(textName.getText(), textRfid.getText(),
+		 * textPhone.getText(), textYear.getText(), textMonth.getText(),
+		 * textDay.getText());
+		 */
+		/*
+		 * textFields[0] = textName; textFields[1] = textRfid; textFields[2] =
+		 * textPhone; textFields[3] = textYear; textFields[4] = textMonth; textFields[5]
+		 * = textDay;
+		 */
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(308, 64, 466, 157);
 		contentPane.add(scrollPane);
 
-		JComboBox<String> comboRoles = new JComboBox<>();
+		comboRoles = new JComboBox<>();
 		comboRoles.setBounds(71, 37, 217, 22);
 		contentPane.add(comboRoles);
 
-		JButton btnMain = new JButton("Query");
-		JButton btnPasses = new JButton("Passes");
-		JButton btnOpeningHours = new JButton("Opening Hours");
-		JButton btnRoles = new JButton("Roles");
+		btnMain = new JButton("Query");
+		btnPasses = new JButton("Passes");
+		btnOpeningHours = new JButton("Opening Hours");
+		btnRoles = new JButton("Roles");
 
 		/* set table which is filled with guests */
 		JTable_Display_Guests = new JTable();
@@ -198,6 +221,7 @@ public class Menu extends JFrame {
 			/* when click on a guest in table, then fill in the text boxes */
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				btnMain.setEnabled(true);
 				int row = JTable_Display_Guests.getSelectedRow();
 				String name = JTable_Display_Guests.getModel().getValueAt(row, 0).toString();
 				String rfid = JTable_Display_Guests.getModel().getValueAt(row, 1).toString();
@@ -231,11 +255,11 @@ public class Menu extends JFrame {
 		for (int i = 0; i < countRoles; i++) {
 			comboRoles.removeItemAt(0);
 		}
-		
-		//when select all on query page, then make empty all TextBox
+
+		// when select all on query page, then make empty all TextBox
 		comboRoles.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent ie) {
-                String selectedItem = comboRoles.getSelectedItem().toString();
+				String selectedItem = comboRoles.getSelectedItem().toString();
 				if (selectedItem.equals("all")) {
 					textName.setText("");
 					textRfid.setText("");
@@ -315,7 +339,8 @@ public class Menu extends JFrame {
 						guest.setValidity(textDate);
 						guest.setRole(comboRoles.getSelectedItem().toString());
 
-						addGuest(guest, lblResultCount);
+						addGuest(guest);
+						getGuestList(lblResultCount);
 					}
 				}
 				// Check that the fields filled well in update page
@@ -332,7 +357,9 @@ public class Menu extends JFrame {
 								textDay.getText());
 
 						if (newGuest != null) {
-							newUpdateGuest(newGuest, lblResultCount);
+							System.out.println(newGuest.getRfid());
+							newUpdateGuest(newGuest, JTable_Display_Guests.getModel().getValueAt(selectedRow, 1).toString());
+							getGuestList(lblResultCount);
 						}
 
 					}
@@ -349,9 +376,9 @@ public class Menu extends JFrame {
 				}
 				// Check that the fields filled well in add page
 				else if (queryToggleButton.isSelected()) {
-					/*for (int i = 0; i < 6; i++) {
-						if()
-					}*/
+					/*
+					 * for (int i = 0; i < 6; i++) { if() }
+					 */
 					if (textName.getText().isEmpty() && textRfid.getText().isEmpty() && textPhone.getText().isEmpty()
 							&& textYear.getText().isEmpty() && textMonth.getText().isEmpty()
 							&& textDay.getText().isEmpty() && comboRoles.getSelectedItem().toString().equals("all")) {
@@ -383,10 +410,10 @@ public class Menu extends JFrame {
 							&& textDay.getText().isEmpty()) {
 						getSortedGuestList(comboRoles.getSelectedItem().toString(), "role", lblResultCount);
 					} else {
-						JOptionPane.showMessageDialog(contentPane, "Fill max one field or choose only the role!");
+						JOptionPane.showMessageDialog(null, "Fill max one field or choose only the role!");
 					}
 				} else {
-					JOptionPane.showMessageDialog(contentPane, "No page selected!");
+					JOptionPane.showMessageDialog(null, "No page selected!");
 				}
 
 				// JOptionPane.showMessageDialog(exitButton, "Wrong Username & Password");
@@ -399,48 +426,16 @@ public class Menu extends JFrame {
 		queryToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (queryToggleButton.isSelected()) {
-					// System.out.println("Selected");
 					btnMain.setText("Query");
-					textName.setText("");
-					textRfid.setText("");
-					textPhone.setText("");
-					textYear.setText("");
-					textMonth.setText("");
-					textDay.setText("");
-					textName.setEnabled(true);
-					textRfid.setEnabled(true);
-					textPhone.setEnabled(true);
-					textYear.setEnabled(true);
-					textMonth.setEnabled(true);
-					textDay.setEnabled(true);
-					comboRoles.setEnabled(true);
-
-					String[] roles2 = roles.fillComboBox();
-					int countRoles = comboRoles.getItemCount();
-					comboRoles.addItem("all");
-					comboRoles.addItem("default");
-					for (String str : roles2) {
-						if (!str.equals("default")) {
-							comboRoles.addItem(str);
-						}
-					}
-					for (int i = 0; i < countRoles; i++) {
-						comboRoles.removeItemAt(0);
-					}
-
-					addToggleButton.setSelected(false);
-					updateToggleButton.setSelected(false);
-					deleteToggleButton.setSelected(false);
 					btnMain.setEnabled(true);
-					lblResultCount.setText("");
+					setTextFieldsToEmpty();
+					switchBetweenTextEnabledTrueOrFalse(true);
+					setComboBox("query");
+					setOtherMenusUnselected(1); // 1: query, 2: add, 3: update, 4: delete (which is selected)
+					JTable_Display_Guests.clearSelection();
 				} else {
 					queryToggleButton.setSelected(true);
 				}
-				/*
-				 * if (!queryToggleButton.isSelected() && !addToggleButton.isSelected() &&
-				 * !updateToggleButton.isSelected() && !deleteToggleButton.isSelected()) {
-				 * btnMain.setEnabled(false); }
-				 */
 			}
 		});
 		queryToggleButton.setBounds(2, 0, 195, 24);
@@ -450,34 +445,15 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (addToggleButton.isSelected()) {
 					btnMain.setText("Add");
-					textName.setText("");
-					textRfid.setText("");
-					textPhone.setText("");
-					textYear.setText("");
-					textMonth.setText("");
-					textDay.setText("");
-					textName.setEnabled(true);
-					textRfid.setEnabled(true);
-					textPhone.setEnabled(true);
-					textYear.setEnabled(true);
-					textMonth.setEnabled(true);
-					textDay.setEnabled(true);
-					comboRoles.setEnabled(true);
-					comboRoles.removeItem("all");
-					comboRoles.setSelectedItem("default");
-					queryToggleButton.setSelected(false);
-					updateToggleButton.setSelected(false);
-					deleteToggleButton.setSelected(false);
 					btnMain.setEnabled(true);
-					lblResultCount.setText("");
+					setTextFieldsToEmpty();
+					switchBetweenTextEnabledTrueOrFalse(true);
+					setComboBox("notQuery");
+					setOtherMenusUnselected(2); // 1: query, 2: add, 3: update, 4: delete (which is selected)
+					JTable_Display_Guests.clearSelection();
 				} else {
 					addToggleButton.setSelected(true);
 				}
-				/*
-				 * if (!queryToggleButton.isSelected() && !addToggleButton.isSelected() &&
-				 * !updateToggleButton.isSelected() && !deleteToggleButton.isSelected()) {
-				 * btnMain.setEnabled(false); }
-				 */
 			}
 		});
 		addToggleButton.setBounds(195, 0, 195, 24);
@@ -487,34 +463,15 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (updateToggleButton.isSelected()) {
 					btnMain.setText("Update");
-					textName.setText("");
-					textRfid.setText("");
-					textPhone.setText("");
-					textYear.setText("");
-					textMonth.setText("");
-					textDay.setText("");
-					textName.setEnabled(true);
-					textRfid.setEnabled(true);
-					textPhone.setEnabled(true);
-					textYear.setEnabled(true);
-					textMonth.setEnabled(true);
-					textDay.setEnabled(true);
-					comboRoles.setEnabled(true);
-					comboRoles.removeItem("all");
-					comboRoles.setSelectedItem("default");
-					queryToggleButton.setSelected(false);
-					addToggleButton.setSelected(false);
-					deleteToggleButton.setSelected(false);
-					btnMain.setEnabled(true);
-					lblResultCount.setText("");
+					btnMain.setEnabled(false);
+					setTextFieldsToEmpty();
+					switchBetweenTextEnabledTrueOrFalse(true);
+					setComboBox("notQuery");
+					setOtherMenusUnselected(3); // 1: query, 2: add, 3: update, 4: delete (which is selected)
+					JTable_Display_Guests.clearSelection();
 				} else {
 					updateToggleButton.setSelected(true);
 				}
-				/*
-				 * if (!queryToggleButton.isSelected() && !addToggleButton.isSelected() &&
-				 * !updateToggleButton.isSelected() && !deleteToggleButton.isSelected()) {
-				 * btnMain.setEnabled(false); }
-				 */
 			}
 		});
 		updateToggleButton.setBounds(390, 0, 195, 24);
@@ -524,34 +481,15 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (deleteToggleButton.isSelected()) {
 					btnMain.setText("Delete");
-					textName.setText("");
-					textRfid.setText("");
-					textPhone.setText("");
-					textYear.setText("");
-					textMonth.setText("");
-					textDay.setText("");
-					textName.setEnabled(false);
-					textRfid.setEnabled(false);
-					textPhone.setEnabled(false);
-					textYear.setEnabled(false);
-					textMonth.setEnabled(false);
-					textDay.setEnabled(false);
-					comboRoles.setEnabled(false);
-					comboRoles.removeItem("all");
-					comboRoles.setSelectedItem("default");
-					queryToggleButton.setSelected(false);
-					addToggleButton.setSelected(false);
-					updateToggleButton.setSelected(false);
 					btnMain.setEnabled(true);
-					lblResultCount.setText("");
+					setTextFieldsToEmpty();
+					switchBetweenTextEnabledTrueOrFalse(false);
+					setComboBox("notQuery");
+					setOtherMenusUnselected(4); // 1: query, 2: add, 3: update, 4: delete (which is selected)
+					JTable_Display_Guests.clearSelection();
 				} else {
 					deleteToggleButton.setSelected(true);
 				}
-				/*
-				 * if (!queryToggleButton.isSelected() && !addToggleButton.isSelected() &&
-				 * !updateToggleButton.isSelected() && !deleteToggleButton.isSelected()) {
-				 * btnMain.setEnabled(false); }
-				 */
 			}
 		});
 		deleteToggleButton.setBounds(585, 0, 195, 24);
@@ -563,6 +501,7 @@ public class Menu extends JFrame {
 		btnOpeningHours.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				openinghours.setLocationRelativeTo(null);
 				openinghours.setVisible(true);
 				openinghours.setComboBox("default", roles, openinghours.lblAMoF, openinghours.lblAMoT,
 						openinghours.lblATuF, openinghours.lblATuT, openinghours.lblAWeF, openinghours.lblAWeT,
@@ -586,6 +525,7 @@ public class Menu extends JFrame {
 
 		btnPasses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				passes.setLocationRelativeTo(null);
 				passes.setVisible(true);
 			}
 		});
@@ -594,6 +534,7 @@ public class Menu extends JFrame {
 
 		btnRoles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				roles.setLocationRelativeTo(null);
 				roles.setVisible(true);
 			}
 		});
@@ -619,7 +560,7 @@ public class Menu extends JFrame {
 				&& !tday.isEmpty()) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Fill all fields!");
+			JOptionPane.showMessageDialog(null, "Fill all fields!");
 			return false;
 		}
 	}
@@ -629,7 +570,7 @@ public class Menu extends JFrame {
 				|| !tday.isEmpty()) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Fill least one field to be modified!");
+			JOptionPane.showMessageDialog(null, "Fill least one field to be modified!");
 			return false;
 		}
 	}
@@ -649,7 +590,7 @@ public class Menu extends JFrame {
 		if (selectedRow != -1) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Select one row from table!");
+			JOptionPane.showMessageDialog(null, "Select one row from table!");
 			return false;
 		}
 	}
@@ -667,10 +608,11 @@ public class Menu extends JFrame {
 	public Guest setNewGuestValues(Guest selectedGuest, JComboBox<String> comboRoles, String tname, String trfid,
 			String tphone, String tyear, String tmonth, String tday) {
 		boolean updateable = true;
-		if (selectedGuest.getRfid().equals(textRfid.getText())) {
+		if (selectedGuest.getRfid().equals(trfid)) {
 
-			if (checkAllRowsAreSame(selectedGuest, comboRoles, tname, textRfid.getText(), textPhone.getText(),
-					textYear.getText(), textMonth.getText(), textDay.getText())) {
+			//System.out.println("asdasd");
+			if (checkAllRowsAreSame(selectedGuest, comboRoles, tname, trfid, tphone,
+					tyear, tmonth, tday)) {
 				updateable = false;
 			} else {
 				if (!tname.isEmpty()) {
@@ -703,12 +645,16 @@ public class Menu extends JFrame {
 			}
 			// if want to change rfid
 		} else {
+
+			System.out.println("asdasd");
+			
 			if (!tname.isEmpty()) {
 				selectedGuest.setName(tname);
 			}
 			if (!trfid.isEmpty()) {
-				if (correctRfid(trfid)) {
+				if (correctRfid(trfid) && dbContainRfid(trfid)) {
 					selectedGuest.setRfid(trfid);
+					//System.out.println(trfid);
 				} else {
 					updateable = false;
 				}
@@ -743,7 +689,7 @@ public class Menu extends JFrame {
 		if (guest.getName().equals(tname) && String.valueOf(guest.getPhone()).equals(tphone)
 				&& tyear.equals(guest.getYear()) && tmonth.equals(guest.getMonth()) && tday.equals(guest.getDay())
 				&& guest.getRole().equals(comboRoles.getSelectedItem().toString())) {
-			JOptionPane.showMessageDialog(contentPane, "All row is same! What do you want to change?");
+			JOptionPane.showMessageDialog(null, "All row is same! What do you want to change?");
 			return true;
 		} else {
 			return false;
@@ -762,6 +708,73 @@ public class Menu extends JFrame {
 	 * guest.setRole(comboRoles.getSelectedItem().toString()); } return guest; }
 	 */
 
+	public void setTextFieldsToEmpty() {
+		textName.setText("");
+		textRfid.setText("");
+		textPhone.setText("");
+		textYear.setText("");
+		textMonth.setText("");
+		textDay.setText("");
+		lblResultCount.setText("");
+	}
+
+	public void switchBetweenTextEnabledTrueOrFalse(boolean permission) {
+		textName.setEnabled(permission);
+		textRfid.setEnabled(permission);
+		textPhone.setEnabled(permission);
+		textYear.setEnabled(permission);
+		textMonth.setEnabled(permission);
+		textDay.setEnabled(permission);
+		comboRoles.setEnabled(permission);
+	}
+
+	public void setComboBox(String which) {
+		if (which.equals("notQuery")) {
+			comboRoles.removeItem("all");
+			comboRoles.setSelectedItem("default");
+		} else if (which.equals("query")) {
+			String[] roles2 = roles.fillComboBox();
+			int countRoles = comboRoles.getItemCount();
+			comboRoles.addItem("all");
+			comboRoles.addItem("default");
+			for (String str : roles2) {
+				if (!str.equals("default")) {
+					comboRoles.addItem(str);
+				}
+			}
+			for (int i = 0; i < countRoles; i++) {
+				comboRoles.removeItemAt(0);
+			}
+		}
+
+	}
+
+	public void setOtherMenusUnselected(int which) {
+		switch (which) {
+		case 1:
+			addToggleButton.setSelected(false);
+			updateToggleButton.setSelected(false);
+			deleteToggleButton.setSelected(false);
+			break;
+		case 2:
+			queryToggleButton.setSelected(false);
+			updateToggleButton.setSelected(false);
+			deleteToggleButton.setSelected(false);
+			break;
+		case 3:
+			queryToggleButton.setSelected(false);
+			addToggleButton.setSelected(false);
+			deleteToggleButton.setSelected(false);
+			break;
+		case 4:
+			queryToggleButton.setSelected(false);
+			addToggleButton.setSelected(false);
+			updateToggleButton.setSelected(false);
+			break;
+
+		}
+	}
+
 	public boolean isNumeric(String strNum) {
 		if (strNum == null) {
 			return false;
@@ -778,7 +791,7 @@ public class Menu extends JFrame {
 		if (rfid.length() == 10) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Rfid field requires 10 characters!");
+			JOptionPane.showMessageDialog(null, "Rfid field requires 10 characters!");
 			return false;
 		}
 
@@ -790,12 +803,12 @@ public class Menu extends JFrame {
 			if (isNumeric(phone)) {
 				return true;
 			} else {
-				JOptionPane.showMessageDialog(contentPane, "Phone field requires numbers!");
+				JOptionPane.showMessageDialog(null, "Phone field requires numbers!");
 				return false;
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Phone field requires 8-9 characters!");
+			JOptionPane.showMessageDialog(null, "Phone field requires 8-9 characters!");
 			return false;
 		}
 
@@ -813,7 +826,7 @@ public class Menu extends JFrame {
 							if (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 31) {
 								return true;
 							} else {
-								JOptionPane.showMessageDialog(contentPane,
+								JOptionPane.showMessageDialog(null,
 										"Validity day field requires a value between 1-30 at " + month_value
 												+ " month!");
 								return false;
@@ -824,7 +837,7 @@ public class Menu extends JFrame {
 								if (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 30) {
 									return true;
 								} else {
-									JOptionPane.showMessageDialog(contentPane,
+									JOptionPane.showMessageDialog(null,
 											"Validity day field requires a value between 1-29 at " + month_value
 													+ " month! Because this year is leap year!");
 									return false;
@@ -834,7 +847,7 @@ public class Menu extends JFrame {
 								if (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 29) {
 									return true;
 								} else {
-									JOptionPane.showMessageDialog(contentPane,
+									JOptionPane.showMessageDialog(null,
 											"Validity day field requires a value between 1-28 at " + month_value
 													+ " month!");
 									return false;
@@ -853,7 +866,7 @@ public class Menu extends JFrame {
 							if (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 32) {
 								return true;
 							} else {
-								JOptionPane.showMessageDialog(contentPane,
+								JOptionPane.showMessageDialog(null,
 										"Validity day field requires a value between 1-31 at " + month_value
 												+ " month!");
 								return false;
@@ -862,21 +875,21 @@ public class Menu extends JFrame {
 						}
 
 					} else {
-						JOptionPane.showMessageDialog(contentPane,
+						JOptionPane.showMessageDialog(null,
 								"Validity month field requires a value between 1-12!");
 						return false;
 					}
 				} else {
-					JOptionPane.showMessageDialog(contentPane,
+					JOptionPane.showMessageDialog(null,
 							"Validity year field requires a value between 2022-2100!");
 					return false;
 				}
 			} else {
-				JOptionPane.showMessageDialog(contentPane, "Validity fields requires numberic value!");
+				JOptionPane.showMessageDialog(null, "Validity fields requires numberic value!");
 				return false;
 			}
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Validity fields requires YYYY / MM / DD characters!");
+			JOptionPane.showMessageDialog(null, "Validity fields requires YYYY / MM / DD characters!");
 			return false;
 		}
 	}
@@ -897,13 +910,13 @@ public class Menu extends JFrame {
 				if (rs.getInt(1) == 0) {
 					return true;
 				} else {
-					JOptionPane.showMessageDialog(contentPane, "Database contains this RFID!");
+					JOptionPane.showMessageDialog(null, "Database contains this RFID!");
 					return false;
 				}
 			}
 
 		} catch (SQLException sqlException) {
-			JOptionPane.showMessageDialog(contentPane, "Database exception! Pls check the database connection!");
+			JOptionPane.showMessageDialog(null, "Database exception! Pls check the database connection!");
 			sqlException.printStackTrace();
 		} catch (Exception f) {
 			System.out.println(f);
@@ -912,7 +925,7 @@ public class Menu extends JFrame {
 
 	}
 
-	public void addGuest(Guest guest, JLabel lblResultCount) {
+	public void addGuest(Guest guest) {
 		try {
 
 			boolean databaseGuestsNumberIsZero = false;
@@ -953,11 +966,11 @@ public class Menu extends JFrame {
 				st.executeUpdate();
 			}
 
-			getGuestList(lblResultCount);
+			//getGuestList(lblResultCount);
 
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			JOptionPane.showMessageDialog(contentPane, "Database exception! Pls check the database connection!");
+			JOptionPane.showMessageDialog(null, "Database exception! Pls check the database connection!");
 		} catch (Exception f) {
 			System.out.println(f);
 		} finally {
@@ -965,9 +978,10 @@ public class Menu extends JFrame {
 		}
 	}
 
-	public void newUpdateGuest(Guest guest, JLabel lblResultCount) {
+	public void newUpdateGuest(Guest guest, String actual_rfid) {
 		try {
-			String actual_rfid = guest.getRfid();
+			//String actual_rfid = guest.getRfid();
+			System.out.println(actual_rfid);
 			Connection connection = (Connection) DriverManager.getConnection(
 					"jdbc:mysql://@localhost:3306/szakdoga?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
 					"root", "1234");
@@ -988,17 +1002,14 @@ public class Menu extends JFrame {
 			st.setInt(3, guest.getPhone());
 			st.setString(4, guest.getValidity());
 			st.setString(5, guest.getRole());
-			System.out.println(guest.getRole());
 			st.setString(6, actual_rfid);
 			st.executeUpdate();
 
-			getGuestList(lblResultCount);
-
-			// JOptionPane.showMessageDialog(contentPane, "The update was successful!");
+			// JOptionPane.showMessageDialog(null, "The update was successful!");
 
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			JOptionPane.showMessageDialog(contentPane, "Database exception! Pls check the database connection!");
+			JOptionPane.showMessageDialog(null, "Database exception! Pls check the database connection!");
 		} catch (Exception f) {
 			System.out.println(f);
 		} finally {
@@ -1018,10 +1029,10 @@ public class Menu extends JFrame {
 			st.execute();
 
 			getGuestList(lblResultCount);
-			// JOptionPane.showMessageDialog(contentPane, "The delete was successful!");
+			// JOptionPane.showMessageDialog(null, "The delete was successful!");
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			JOptionPane.showMessageDialog(contentPane, "Database exception! Pls check the database connection!");
+			JOptionPane.showMessageDialog(null, "Database exception! Pls check the database connection!");
 		} catch (Exception f) {
 			System.out.println(f);
 		} finally {
@@ -1084,7 +1095,7 @@ public class Menu extends JFrame {
 
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			JOptionPane.showMessageDialog(contentPane, "Database exception! Pls check the database connection!");
+			JOptionPane.showMessageDialog(null, "Database exception! Pls check the database connection!");
 		} catch (Exception f) {
 			System.out.println(f);
 		}
@@ -1132,7 +1143,7 @@ public class Menu extends JFrame {
 
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			JOptionPane.showMessageDialog(contentPane, "Database exception! Pls check the database connection!");
+			JOptionPane.showMessageDialog(null, "Database exception! Pls check the database connection!");
 		} catch (Exception f) {
 			System.out.println(f);
 		}

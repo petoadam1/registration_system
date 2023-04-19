@@ -106,6 +106,7 @@ public class Entrance extends JFrame {
 						dispose();
 						Menu menu = new Menu();
 						menu.setTitle("Menu");
+						menu.setLocationRelativeTo(null);
 						menu.setVisible(true);
 					} else {
 						JOptionPane.showMessageDialog(exitButton, "Wrong username or password");
